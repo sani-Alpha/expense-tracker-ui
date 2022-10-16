@@ -1,0 +1,94 @@
+.expense-graph-container {
+  background-color: #f9dfff;
+
+  .expense-graph-fill-meter {
+    background-color: #c3b4f3;
+    .expense-graph-fill-meter__fill {
+      background-color: #510674;
+    }
+  }
+}
+
+.expense-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  margin: 10px;
+  background-color: #6e6e6e;
+  border: 1px solid black;
+  border-radius: 12px;
+
+  .date-container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    font-size: 20px;
+    margin: 0 10px 0 5px;
+    border: 1px solid white;
+    border-radius: 12px;
+    min-width: 12%;
+    padding: 10px;
+    color: white;
+    background-color: #343030;
+    @media (max-width: 768px) {
+      font-size: 16px;
+      min-width: 22%;
+    }
+    ._day {
+      font-size: 24px;
+      font-weight: 600;
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+    }
+
+    ._month {
+      font-size: 18px;
+      font-weight: 500;
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
+    ._year {
+      font-weight: 450;
+      font-size: 16px;
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .expense-item_description {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+
+    h2 {
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 5px;
+      @media (max-width: 768px) {
+        font-size: 18px;
+      }
+    }
+
+    .expense-item_price {
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+      background-color: #40005d;
+      border: 1px solid white;
+      padding: 10px;
+      border-radius: 12px;
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.dropdown-container {
+  display: flex;
+  flex-flow: column wrap;
+
+  label {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .dropdown {
+    text-align: center;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 0.5rem;
+    min-width: 6rem;
+  }
+}

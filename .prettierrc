@@ -1,0 +1,34 @@
+{
+  "semi": false,
+  "overrides": [
+    {
+      "files": "*.js",
+      "options": {
+        "semi": true,
+        "printWidth": 120,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "bracketSpacing": false,
+        "jsxBracketSameLine": false,
+        "parser": "flow",
+        "tabWidth": 2,
+        "endOfLine": "auto",
+        "arrowParens": "avoid"
+      }
+    },
+    {
+      "files": "*.{css,scss,less,sss}",
+      "options": {
+        "tabWidth": 2,
+        "semi": true,
+        "bracketSpacing": false
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}

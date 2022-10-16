@@ -1,0 +1,53 @@
+.new-expense-card {
+  background-color: #a892ee;
+  margin-bottom: 30px;
+}
+
+.expense-form {
+  margin: 10px;
+
+  .heading {
+    font-size: 26px;
+    font-weight: 600;
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  .expense-form-controllers {
+    .expense-form-text {
+      label {
+        font-size: 24px;
+        @media (max-width: 768px) {
+          font-size: 18px;
+        }
+      }
+
+      input {
+        min-height: 30px;
+      }
+    }
+  }
+
+  .expense-form-action-cta {
+    text-align: right;
+    margin-top: 20px;
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #40005d;
+      background-color: #40005d;
+      color: white;
+      border-radius: 12px;
+      margin-right: 16px;
+
+      &:hover,
+      &:active {
+        background-color: #510674;
+        border-color: #510674;
+      }
+    }
+  }
+}

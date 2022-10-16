@@ -1,0 +1,47 @@
+.graph-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 10rem;
+  padding: 1.5rem 0 1.5rem 0;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    padding: 0.4rem 0 0.4rem 0;
+  }
+
+  .graph {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+
+    .graph-fill-meter {
+      min-width: 1rem;
+      height: 100%;
+      border: 1px solid black;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      @media (max-width: 768px) {
+        min-width: 0.6rem;
+      }
+
+      .graph-fill-meter__fill {
+        transition: all 0.5s ease-out;
+      }
+    }
+
+    .graph-label {
+      font-size: 20px;
+      font-weight: 600;
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
+    }
+  }
+}
