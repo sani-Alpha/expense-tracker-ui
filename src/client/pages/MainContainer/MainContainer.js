@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, Fragment} from 'react';
 import ExpenseItemList from '../Expenses/ExpenseItemList';
 import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 import NewExpense from '../NewExpense/NewExpense';
@@ -27,7 +27,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div>
+    <Fragment>
       <div className="header">Expense Tracker</div>
       <div className="body-container">
         <NewExpense addExpenseToList={addExpenseToListHandler} />
@@ -36,7 +36,7 @@ const MainContainer = () => {
           <ExpenseItemList data={data} filter={selectedYear} />
         </Card>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

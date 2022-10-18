@@ -18,7 +18,7 @@ const ExpenseItemList = ({data, filter}) => {
 
   if (qualifiyingData.length) {
     return (
-      <div>
+      <>
         <Graph
           dataPoints={labels}
           maxValue={qualifiyingData.length}
@@ -32,7 +32,7 @@ const ExpenseItemList = ({data, filter}) => {
             <ExpenseItem key={item._id} item={item.title} price={item.price} date={item.date} />
           ))}
         </div>
-      </div>
+      </>
     );
   }
   return <h2 style={{textAlign: 'center'}}>No expenses found!</h2>;
