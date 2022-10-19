@@ -1,20 +1,33 @@
 import moment from 'moment';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useReducer} from 'react';
 import Card from '../../components/Card/Card';
 import Input from '../../components/Input/Input';
 import './NewExpense.scss';
+
+const setNewExpenseData = (prevState, action) => {
+  console.log(prevState, action);
+  const {type, value, context} = action;
+  if (type === 'UPDATING_EXPENSE_DATA') {
+    return {...prevState, [context]: value};
+  }
+  return {title: '', price: '', date: new Date()};
+};
 
 const NewExpense = ({addExpenseToList}) => {
   const minDate = moment().subtract(4, 'years').format('YYYY-MM-DD');
   const maxDate = moment().format('YYYY-MM-DD');
 
-  const [newExpenseData, setNewExpenseData] = useState({title: '', price: 0, date: new Date()});
+  const [newExpenseData, newExpenseDataDispatch] = useReducer(setNewExpenseData, {
+    title: '',
+    price: 0,
+    date: new Date()
+  });
   const [allowSubmit, setAllowSubmit] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setAllowSubmit(newExpenseData.date && newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
-    }, 800);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
@@ -32,18 +45,13 @@ const NewExpense = ({addExpenseToList}) => {
     }
 
     event.preventDefault();
-    setNewExpenseData(prevState => {
-      return {
-        ...prevState,
-        [context]: modifiedValue
-      };
-    });
+    newExpenseDataDispatch({type: 'UPDATING_EXPENSE_DATA', value: modifiedValue, context});
   };
 
   const submitNewExpenseHandler = event => {
     event.preventDefault();
     addExpenseToList({...newExpenseData, _id: (Math.random() + 1).toString(36).substring(7)});
-    setNewExpenseData({title: '', price: '', date: new Date()});
+    newExpenseDataDispatch({type: 'RESET_NEW_EXPENSE_DATA'});
   };
 
   return (

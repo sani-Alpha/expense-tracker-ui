@@ -47,11 +47,12 @@
         background-color: #510674;
         border-color: #510674;
       }
-      &:disabled,
-      &:active {
+      &:disabled {
         background-color: #69646b;
         border-color: white;
         color: black;
+        cursor: not-allowed;
+        pointer-events: all !important;
       }
     }
   }
