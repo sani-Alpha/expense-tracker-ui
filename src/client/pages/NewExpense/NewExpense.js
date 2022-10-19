@@ -12,7 +12,13 @@ const NewExpense = ({addExpenseToList}) => {
   const [allowSubmit, setAllowSubmit] = useState(false);
 
   useEffect(() => {
-    setAllowSubmit(newExpenseData.date && newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
+    const timer = setTimeout(() => {
+      setAllowSubmit(newExpenseData.date && newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
+    }, 800);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [newExpenseData.date, newExpenseData.price, newExpenseData.title]);
 
   const expenseDataHandler = (event, context) => {
