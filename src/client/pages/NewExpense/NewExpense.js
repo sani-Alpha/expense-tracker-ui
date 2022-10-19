@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Card from '../../components/Card/Card';
 import Input from '../../components/Input/Input';
 import './NewExpense.scss';
@@ -9,6 +9,11 @@ const NewExpense = ({addExpenseToList}) => {
   const maxDate = moment().format('YYYY-MM-DD');
 
   const [newExpenseData, setNewExpenseData] = useState({title: '', price: 0, date: new Date()});
+  const [allowSubmit, setAllowSubmit] = useState(false);
+
+  useEffect(() => {
+    setAllowSubmit(newExpenseData.date && newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
+  }, [newExpenseData.date, newExpenseData.price, newExpenseData.title]);
 
   const expenseDataHandler = (event, context) => {
     const value = event?.target?.value;
@@ -78,7 +83,9 @@ const NewExpense = ({addExpenseToList}) => {
           </div>
         </div>
         <div className="expense-form-action-cta">
-          <button onClick={submitNewExpenseHandler}>Add Expense</button>
+          <button disabled={!allowSubmit} onClick={submitNewExpenseHandler}>
+            Add Expense
+          </button>
         </div>
       </div>
     </Card>

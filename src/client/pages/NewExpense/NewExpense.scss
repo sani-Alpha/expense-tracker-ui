@@ -42,11 +42,16 @@
       color: white;
       border-radius: 12px;
       margin-right: 16px;
-
       &:hover,
       &:active {
         background-color: #510674;
         border-color: #510674;
+      }
+      &:disabled,
+      &:active {
+        background-color: #69646b;
+        border-color: white;
+        color: black;
       }
     }
   }
