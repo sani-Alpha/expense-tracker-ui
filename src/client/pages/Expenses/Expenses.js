@@ -16,21 +16,11 @@ const Expenses = () => {
   const [data, setData] = useState(expenseList);
   const [selectedYear, setSelectedYear] = useState('-1');
 
-  const addExpenseToListHandler = newExpense => {
-    setData(prevState => {
-      return [newExpense, ...prevState];
-    });
-  };
-
-  const addYearFilterHandler = year => {
-    setSelectedYear(year);
-  };
-
   return (
     <div className="body-container">
-      <NewExpense addExpenseToList={addExpenseToListHandler} />
+      <NewExpense addExpenseToList={newExpense => setData(prevState => [newExpense, ...prevState])} />
       <Card className="list-card">
-        <ExpenseFilter selected={selectedYear} changeHandler={addYearFilterHandler} />
+        <ExpenseFilter selected={selectedYear} changeHandler={year => setSelectedYear(year)} />
         <ExpenseList data={data} filter={selectedYear} />
       </Card>
     </div>

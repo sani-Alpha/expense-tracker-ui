@@ -8,14 +8,25 @@
   justify-content: space-between;
   align-items: center;
   background: #741188;
-  padding: 0 1.3rem;
 
-  div {
+  .title {
+    margin-left: 1.5rem;
+    flex: 0.5;
     font-size: 26px;
     color: white;
 
     @media (max-width: 768px) {
-      font-size: 20px;
+      font-size: 22px;
+    }
+  }
+
+  .navIcon {
+    margin-right: 1.5rem;
+    display: none;
+    color: white;
+    font-size: 1.2rem;
+    @media (max-width: 600px) {
+      display: block;
     }
   }
 }
