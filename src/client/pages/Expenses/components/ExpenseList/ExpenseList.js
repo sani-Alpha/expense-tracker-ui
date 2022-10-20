@@ -2,7 +2,7 @@ import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
 import Graph from '../../../../commons/Graph/Graph';
 
-const ExpenseItemList = ({data, filter}) => {
+const ExpenseList = ({data, filter}) => {
   const qualifiyingData = filter === '-1' ? data : data.filter(item => item.date.getFullYear() === Number(filter));
   const months = moment.monthsShort();
   const labels = months.map(month => {
@@ -38,4 +38,4 @@ const ExpenseItemList = ({data, filter}) => {
   return <h2 style={{textAlign: 'center'}}>No expenses found!</h2>;
 };
 
-export default ExpenseItemList;
+export default ExpenseList;

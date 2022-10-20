@@ -1,10 +1,10 @@
 import styles from './Input.module.scss';
 
-const Input = ({id, name, label, value, dataType, min, max, step, className, changeHandler}) => {
+const Input = ({id, name, label, value, type, min, max, step, className, changeHandler, blurHandler}) => {
   const classes = className ? `${styles['form-control-input']} ` + className : styles['form-control-input'];
   let input = (
     <input
-      type="text"
+      type={type}
       id={id}
       value={value}
       className={styles['input-box']}
@@ -12,7 +12,7 @@ const Input = ({id, name, label, value, dataType, min, max, step, className, cha
     />
   );
 
-  if (dataType === 'number') {
+  if (type === 'number') {
     input = (
       <input
         type="number"
@@ -24,7 +24,7 @@ const Input = ({id, name, label, value, dataType, min, max, step, className, cha
         onChange={event => changeHandler(event, name)}
       />
     );
-  } else if (dataType === 'date') {
+  } else if (type === 'date') {
     input = (
       <input
         type="date"

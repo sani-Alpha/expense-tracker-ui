@@ -12,13 +12,10 @@ const DropDown = ({options, title, id, selected, onChangeHandler, className, lab
     );
   }
 
-  const valueChangeHandler = event => {
-    onChangeHandler(event.target.value);
-  };
   return (
     <div className={styles['dropdown-container']}>
       {label}
-      <select id={id} value={selected} className={classes} onChange={valueChangeHandler}>
+      <select id={id} value={selected} className={classes} onChange={e => onChangeHandler(e.target.value)}>
         {options.map(option => {
           return (
             <option value={option.value} key={option._id}>

@@ -1,11 +1,11 @@
-import {useState, Fragment} from 'react';
-import ExpenseItemList from './components/Expenses/ExpenseItemList';
+import {useState} from 'react';
+import ExpenseList from './components/ExpenseList/ExpenseList';
 import ExpenseFilter from './components/ExpenseFilter/ExpenseFilter';
 import NewExpense from './components/NewExpense/NewExpense';
 import Card from '../../commons/Card/Card';
-import './MainContainer.scss';
+import './Expenses.scss';
 
-const MainContainer = () => {
+const Expenses = () => {
   const expenseList = [
     {_id: 1, title: 'Car Insurance', price: 24000, date: new Date(2019, 11, 20)},
     {_id: 2, title: 'House Loan', price: 120000, date: new Date(2020, 0, 1)},
@@ -27,17 +27,14 @@ const MainContainer = () => {
   };
 
   return (
-    <Fragment>
-      <div className="header">Expense Tracker</div>
-      <div className="body-container">
-        <NewExpense addExpenseToList={addExpenseToListHandler} />
-        <Card className="list-card">
-          <ExpenseFilter selected={selectedYear} changeHandler={addYearFilterHandler} />
-          <ExpenseItemList data={data} filter={selectedYear} />
-        </Card>
-      </div>
-    </Fragment>
+    <div className="body-container">
+      <NewExpense addExpenseToList={addExpenseToListHandler} />
+      <Card className="list-card">
+        <ExpenseFilter selected={selectedYear} changeHandler={addYearFilterHandler} />
+        <ExpenseList data={data} filter={selectedYear} />
+      </Card>
+    </div>
   );
 };
 
-export default MainContainer;
+export default Expenses;

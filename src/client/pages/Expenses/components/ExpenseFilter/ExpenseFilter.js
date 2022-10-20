@@ -11,18 +11,10 @@ const ExpenseFilter = ({changeHandler, selected}) => {
     {label: '2018', value: 2018, _id: 5}
   ];
 
-  const onSelectedYearChange = newValue => {
-    changeHandler(newValue);
-  };
   return (
     <div className="expense-filter-container">
       <label>Filter by year</label>
-      <DropDown
-        options={options}
-        id="expense-filter-years"
-        selected={selected}
-        onChangeHandler={onSelectedYearChange}
-      />
+      <DropDown options={options} id="expense-filter-years" selected={selected} onChangeHandler={changeHandler} />
     </div>
   );
 };

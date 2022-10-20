@@ -1,7 +1,6 @@
 import moment from 'moment';
 import {useState, useEffect, useReducer} from 'react';
-import Card from '../../../../commons/Card/Card';
-import Input from '../../../../commons/Input/Input';
+import {Card, Button, Input} from '../../../../commons/index';
 import styles from './NewExpense.module.scss';
 
 const setNewExpenseData = (prevState, action) => {
@@ -26,7 +25,7 @@ const NewExpense = ({addExpenseToList}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setAllowSubmit(newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
-    }, 500);
+    }, 300);
 
     return () => {
       clearTimeout(timer);
@@ -63,6 +62,7 @@ const NewExpense = ({addExpenseToList}) => {
               id="new-expense-title"
               name="title"
               label="Title"
+              type="text"
               value={newExpenseData.title}
               className={styles['form-text']}
               changeHandler={expenseDataHandler}
@@ -74,7 +74,7 @@ const NewExpense = ({addExpenseToList}) => {
               name="price"
               value={newExpenseData.price}
               label="Price"
-              dataType="number"
+              type="number"
               min="0.1"
               step="0.1"
               className={styles['form-text']}
@@ -87,7 +87,7 @@ const NewExpense = ({addExpenseToList}) => {
               name="date"
               label="Date"
               value={moment(newExpenseData.date).format('YYYY-MM-DD')}
-              dataType="date"
+              type="date"
               min={minDate}
               max={maxDate}
               className={styles['form-text']}
@@ -96,9 +96,9 @@ const NewExpense = ({addExpenseToList}) => {
           </div>
         </div>
         <div className={styles['form-action-cta']}>
-          <button disabled={!allowSubmit} onClick={submitNewExpenseHandler}>
+          <Button disabled={!allowSubmit} clickHandler={submitNewExpenseHandler}>
             Add Expense
-          </button>
+          </Button>
         </div>
       </div>
     </Card>

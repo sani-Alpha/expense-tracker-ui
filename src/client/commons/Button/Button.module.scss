@@ -1,0 +1,21 @@
+button {
+  font: inherit;
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #40005d;
+  background-color: #40005d;
+  color: white;
+  border-radius: 12px;
+  &:hover,
+  &:active {
+    background-color: #510674;
+    border-color: #510674;
+  }
+  &:disabled {
+    background-color: #cccccc;
+    border-color: white;
+    color: black;
+    cursor: not-allowed;
+    pointer-events: all !important;
+  }
+}
