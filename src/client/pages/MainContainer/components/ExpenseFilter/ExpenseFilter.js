@@ -1,4 +1,4 @@
-import DropDown from '../../commons/DropDown/DropDown';
+import DropDown from '../../../../commons/DropDown/DropDown';
 import './ExpenseFilter.scss';
 
 const ExpenseFilter = ({changeHandler, selected}) => {

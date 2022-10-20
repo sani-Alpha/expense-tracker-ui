@@ -1,6 +1,6 @@
 import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
-import Graph from '../../commons/Graph/Graph';
+import Graph from '../../../../commons/Graph/Graph';
 
 const ExpenseItemList = ({data, filter}) => {
   const qualifiyingData = filter === '-1' ? data : data.filter(item => item.date.getFullYear() === Number(filter));

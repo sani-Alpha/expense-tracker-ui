@@ -1,7 +1,7 @@
 import moment from 'moment';
 import {useState, useEffect, useReducer} from 'react';
-import Card from '../../commons/Card/Card';
-import Input from '../../commons/Input/Input';
+import Card from '../../../../commons/Card/Card';
+import Input from '../../../../commons/Input/Input';
 import styles from './NewExpense.module.scss';
 
 const setNewExpenseData = (prevState, action) => {

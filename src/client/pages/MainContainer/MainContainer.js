@@ -1,7 +1,7 @@
 import {useState, Fragment} from 'react';
-import ExpenseItemList from '../Expenses/ExpenseItemList';
-import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
-import NewExpense from '../NewExpense/NewExpense';
+import ExpenseItemList from './components/Expenses/ExpenseItemList';
+import ExpenseFilter from './components/ExpenseFilter/ExpenseFilter';
+import NewExpense from './components/NewExpense/NewExpense';
 import Card from '../../commons/Card/Card';
 import './MainContainer.scss';
 
