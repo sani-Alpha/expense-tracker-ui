@@ -2,10 +2,9 @@ import moment from 'moment';
 import {useState, useEffect, useReducer} from 'react';
 import Card from '../../components/Card/Card';
 import Input from '../../components/Input/Input';
-import './NewExpense.scss';
+import styles from './NewExpense.module.scss';
 
 const setNewExpenseData = (prevState, action) => {
-  console.log(prevState, action);
   const {type, value, context} = action;
   if (type === 'UPDATING_EXPENSE_DATA') {
     return {...prevState, [context]: value};
@@ -26,13 +25,13 @@ const NewExpense = ({addExpenseToList}) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAllowSubmit(newExpenseData.date && newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
+      setAllowSubmit(newExpenseData.price > 0 && newExpenseData.title.trim().length > 0);
     }, 500);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [newExpenseData.date, newExpenseData.price, newExpenseData.title]);
+  }, [newExpenseData.price, newExpenseData.title]);
 
   const expenseDataHandler = (event, context) => {
     const value = event?.target?.value;
@@ -55,21 +54,21 @@ const NewExpense = ({addExpenseToList}) => {
   };
 
   return (
-    <Card className="new-expense-card">
-      <div className="expense-form">
-        <label className="heading">Enter the details of new Expense:</label>
-        <div className="expense-form-controllers">
-          <div className="expense-form-control">
+    <Card className={styles['new-expense-card']}>
+      <div className={styles.form}>
+        <label className={styles.heading}>Enter the details of new Expense:</label>
+        <div className={styles['form-controllers']}>
+          <div className={styles['form-control']}>
             <Input
               id="new-expense-title"
               name="title"
               label="Title"
               value={newExpenseData.title}
-              className="expense-form-text"
+              className={styles['form-text']}
               changeHandler={expenseDataHandler}
             />
           </div>
-          <div className="expense-form-control">
+          <div className={styles['form-control']}>
             <Input
               id="new-expense-price"
               name="price"
@@ -78,11 +77,11 @@ const NewExpense = ({addExpenseToList}) => {
               dataType="number"
               min="0.1"
               step="0.1"
-              className="expense-form-text"
+              className={styles['form-text']}
               changeHandler={expenseDataHandler}
             />
           </div>
-          <div className="expense-form-control">
+          <div className={styles['form-control']}>
             <Input
               id="new-expense-date"
               name="date"
@@ -91,12 +90,12 @@ const NewExpense = ({addExpenseToList}) => {
               dataType="date"
               min={minDate}
               max={maxDate}
-              className="expense-form-text"
+              className={styles['form-text']}
               changeHandler={expenseDataHandler}
             />
           </div>
         </div>
-        <div className="expense-form-action-cta">
+        <div className={styles['form-action-cta']}>
           <button disabled={!allowSubmit} onClick={submitNewExpenseHandler}>
             Add Expense
           </button>

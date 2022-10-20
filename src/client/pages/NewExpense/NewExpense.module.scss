@@ -3,7 +3,7 @@
   margin-bottom: 30px;
 }
 
-.expense-form {
+.form {
   margin: 10px;
 
   .heading {
@@ -14,8 +14,8 @@
     }
   }
 
-  .expense-form-controllers {
-    .expense-form-text {
+  .form-controllers {
+    .form-text {
       label {
         font-size: 24px;
         @media (max-width: 768px) {
@@ -29,7 +29,7 @@
     }
   }
 
-  .expense-form-action-cta {
+  .form-action-cta {
     text-align: right;
     margin-top: 20px;
 
