@@ -1,9 +1,15 @@
-import './Input.scss';
+import styles from './Input.module.scss';
 
 const Input = ({id, name, label, value, dataType, min, max, step, className, changeHandler}) => {
-  const classes = className ? 'form-control-input ' + className : 'form-control-input';
+  const classes = className ? `${styles['form-control-input']} ` + className : styles['form-control-input'];
   let input = (
-    <input type="text" id={id} value={value} className="input-box" onChange={event => changeHandler(event, name)} />
+    <input
+      type="text"
+      id={id}
+      value={value}
+      className={styles['input-box']}
+      onChange={event => changeHandler(event, name)}
+    />
   );
 
   if (dataType === 'number') {
@@ -12,7 +18,7 @@ const Input = ({id, name, label, value, dataType, min, max, step, className, cha
         type="number"
         id={id}
         value={value}
-        className="input-box"
+        className={styles['input-box']}
         min={min}
         step={step}
         onChange={event => changeHandler(event, name)}
@@ -24,7 +30,7 @@ const Input = ({id, name, label, value, dataType, min, max, step, className, cha
         type="date"
         id={id}
         value={value}
-        className="input-box"
+        className={styles['input-box']}
         min={min}
         max={max}
         onChange={event => changeHandler(event, name)}
@@ -34,7 +40,7 @@ const Input = ({id, name, label, value, dataType, min, max, step, className, cha
 
   return (
     <div className={classes}>
-      <label htmlFor={name} className="input-label">
+      <label htmlFor={name} className={styles['input-label']}>
         {label}
       </label>
       {input}

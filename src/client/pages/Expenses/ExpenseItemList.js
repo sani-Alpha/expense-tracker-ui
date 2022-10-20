@@ -1,9 +1,9 @@
 import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
-import Graph from '../../components/Graph/Graph';
+import Graph from '../../commons/Graph/Graph';
 
 const ExpenseItemList = ({data, filter}) => {
-  const qualifiyingData = data.filter(item => item.date.getFullYear() === Number(filter));
+  const qualifiyingData = filter === '-1' ? data : data.filter(item => item.date.getFullYear() === Number(filter));
   const months = moment.monthsShort();
   const labels = months.map(month => {
     return {label: month, value: 0};

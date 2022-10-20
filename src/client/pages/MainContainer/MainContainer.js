@@ -2,7 +2,7 @@ import {useState, Fragment} from 'react';
 import ExpenseItemList from '../Expenses/ExpenseItemList';
 import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 import NewExpense from '../NewExpense/NewExpense';
-import Card from '../../components/Card/Card';
+import Card from '../../commons/Card/Card';
 import './MainContainer.scss';
 
 const MainContainer = () => {
@@ -14,7 +14,7 @@ const MainContainer = () => {
   ];
 
   const [data, setData] = useState(expenseList);
-  const [selectedYear, setSelectedYear] = useState('2018');
+  const [selectedYear, setSelectedYear] = useState('-1');
 
   const addExpenseToListHandler = newExpense => {
     setData(prevState => {

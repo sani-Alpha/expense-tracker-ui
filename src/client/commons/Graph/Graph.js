@@ -1,13 +1,17 @@
 import Card from '../Card/Card';
-import './Graph.scss';
+import styles from './Graph.module.scss';
 
 const Graph = ({dataPoints, labelClass, fillMeterClass, fillMeterFillClass, graphCardClass, maxValue}) => {
-  const customGraphCardClass = graphCardClass ? 'graph-container ' + graphCardClass : 'graph-container';
-  const customLabelClass = labelClass ? 'graph-label ' + labelClass : 'graph-label';
-  const customGraphFillMeterClass = fillMeterClass ? 'graph-fill-meter ' + fillMeterClass : 'graph-fill-meter';
+  const customGraphCardClass = graphCardClass
+    ? `${styles['graph-container']} ` + graphCardClass
+    : styles['graph-container'];
+  const customLabelClass = labelClass ? `${styles['graph-label']} ` + labelClass : styles['graph-label'];
+  const customGraphFillMeterClass = fillMeterClass
+    ? `${styles['graph-fill-meter']} ` + fillMeterClass
+    : styles['graph-fill-meter'];
   const customFillMeterFillClass = fillMeterFillClass
-    ? 'graph-fill-meter__fill ' + fillMeterFillClass
-    : 'graph-fill-meter__fill';
+    ? `${styles['graph-fill-meter__fill']} ` + fillMeterFillClass
+    : styles['graph-fill-meter__fill'];
 
   if (maxValue > 0) {
     dataPoints.forEach(data => {
@@ -19,7 +23,7 @@ const Graph = ({dataPoints, labelClass, fillMeterClass, fillMeterFillClass, grap
     <Card className={customGraphCardClass}>
       {dataPoints.map(({label, barFillHeight}) => {
         return (
-          <div className="graph" key={label}>
+          <div className={styles.graph} key={label}>
             <div className={customGraphFillMeterClass}>
               <div className={customFillMeterFillClass} style={{height: barFillHeight}}></div>
             </div>

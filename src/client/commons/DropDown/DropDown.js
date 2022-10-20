@@ -1,7 +1,7 @@
-import './DropDown.scss';
+import styles from './DropDown.module.scss';
 
 const DropDown = ({options, title, id, selected, onChangeHandler, className, labelClass}) => {
-  const classes = className ? 'dropdown ' + className : 'dropdown';
+  const classes = className ? `${styles.dropdown} ` + className : styles.dropdown;
 
   let label;
   if (title) {
@@ -16,7 +16,7 @@ const DropDown = ({options, title, id, selected, onChangeHandler, className, lab
     onChangeHandler(event.target.value);
   };
   return (
-    <div className="dropdown-container">
+    <div className={styles['dropdown-container']}>
       {label}
       <select id={id} value={selected} className={classes} onChange={valueChangeHandler}>
         {options.map(option => {

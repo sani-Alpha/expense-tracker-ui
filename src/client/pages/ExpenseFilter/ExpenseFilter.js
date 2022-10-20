@@ -1,8 +1,9 @@
-import DropDown from '../../components/DropDown/DropDown';
+import DropDown from '../../commons/DropDown/DropDown';
 import './ExpenseFilter.scss';
 
 const ExpenseFilter = ({changeHandler, selected}) => {
   const options = [
+    {label: 'All', value: -1, _id: 0},
     {label: '2022', value: 2022, _id: 1},
     {label: '2021', value: 2021, _id: 2},
     {label: '2020', value: 2020, _id: 3},
