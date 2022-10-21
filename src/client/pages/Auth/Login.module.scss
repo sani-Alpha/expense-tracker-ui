@@ -5,10 +5,16 @@
   margin: 10rem auto;
   box-shadow: 0 2px 8px rgb(168 146 238 / 26%);
   border: none;
-  padding: 3rem 1rem 0.5rem 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
 
   @media (max-width: 600px) {
     margin: 10rem 1rem auto;
+  }
+
+  .header_title {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 
   .control {
@@ -18,7 +24,8 @@
         font-weight: 500;
       }
       input {
-        min-height: 2.5rem;
+        min-height: 2rem;
+        font-size: 16px;
       }
     }
   }

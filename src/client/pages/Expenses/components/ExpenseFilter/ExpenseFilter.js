@@ -1,7 +1,10 @@
+import {useContext} from 'react';
+import AuthContext from '../../../../partials/store/auth.store';
 import DropDown from '../../../../commons/DropDown/DropDown';
 import './ExpenseFilter.scss';
 
 const ExpenseFilter = ({changeHandler, selected}) => {
+  const {__} = useContext(AuthContext);
   const options = [
     {label: 'All', value: -1, _id: 0},
     {label: '2022', value: 2022, _id: 1},
@@ -13,7 +16,7 @@ const ExpenseFilter = ({changeHandler, selected}) => {
 
   return (
     <div className="expense-filter-container">
-      <label>Filter by year</label>
+      <label>{__('expense_filter_title')}</label>
       <DropDown options={options} id="expense-filter-years" selected={selected} onChangeHandler={changeHandler} />
     </div>
   );

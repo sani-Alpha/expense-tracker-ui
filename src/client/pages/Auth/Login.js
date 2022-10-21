@@ -1,8 +1,8 @@
 import {useState, useEffect, useReducer, useContext} from 'react';
 import {Card, Button, Input} from '../../commons/index';
 import SignUp from './SignUp';
-import styles from './Auth.module.scss';
-import Store from '../../partials/store/app.store';
+import styles from './Login.module.scss';
+import AuthContext from '../../partials/store/auth.store';
 
 const userDataReducer = (prevState, {action, value, context}) => {
   if (action === 'UPDATE_USER_DATA') {
@@ -18,8 +18,9 @@ const userDataReducer = (prevState, {action, value, context}) => {
   };
 };
 
-const Auth = () => {
-  const {login, signUp} = useContext(Store);
+const Login = () => {
+  const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  const {login, signUp, __} = useContext(AuthContext);
   const [showSignUpForm, toggleSignUpForm] = useState(false);
   const [userData, dispatchUserData] = useReducer(userDataReducer, {
     enteredEmail: '',
@@ -35,8 +36,8 @@ const Auth = () => {
         action: 'UPDATE_USER_DATA',
         context: 'formIsValid',
         value:
-          userData.enteredEmail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) &&
-          userData.enteredPassword.trim() > 6
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(userData.enteredEmail) &&
+          userData.enteredPassword.length > 6
       });
     }, 500);
 
@@ -46,18 +47,18 @@ const Auth = () => {
   }, [userData.enteredEmail, userData.enteredPassword]);
 
   const emailChangeHandler = event => {
-    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredEmail', value: event.target.value});
+    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredEmail', value: event.target.value.trim()});
   };
 
   const passwordChangeHandler = event => {
-    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredPassword', value: event.target.value});
+    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredPassword', value: event.target.value.trim()});
   };
 
   const validateEmailHandler = () => {
     dispatchUserData({
       action: 'UPDATE_USER_DATA',
       context: 'emailIsValid',
-      value: userData.enteredEmail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+      value: emailRegex.test(userData.enteredEmail)
     });
   };
 
@@ -65,7 +66,7 @@ const Auth = () => {
     dispatchUserData({
       action: 'UPDATE_USER_DATA',
       context: 'passwordIsValid',
-      value: userData.enteredPassword.trim().length > 6
+      value: userData.enteredPassword.length > 6
     });
   };
 
@@ -85,13 +86,14 @@ const Auth = () => {
         close={toggleSignUpForm}
       />
       <Card className={styles.login}>
+        <div className={styles['header_title']}>{__('login')}</div>
         <form onSubmit={submitHandler}>
           <div className={`${styles.control} ${!userData.emailIsValid ? styles.invalid : ''}`}>
             <Input
               id="email"
               type="text"
               name="email"
-              label="E-Mail"
+              label={__('email')}
               value={userData.enteredEmail}
               className={styles['form-text']}
               changeHandler={emailChangeHandler}
@@ -103,7 +105,7 @@ const Auth = () => {
               id="password"
               type="password"
               name="password"
-              label="Password"
+              label={__('password')}
               value={userData.enteredPassword}
               className={styles['form-text']}
               changeHandler={passwordChangeHandler}
@@ -112,16 +114,16 @@ const Auth = () => {
           </div>
           <div className={styles['form-action-cta']}>
             <Button type="submit" className={styles.btn} disabled={!userData.formIsValid}>
-              Login
+              {__('login')}
             </Button>
           </div>
         </form>
         <div className={styles.alternates}>
-          <div onClick={() => toggleSignUpForm(prevState => !prevState)}>Not registered? SignUp Instead!</div>
+          <div onClick={() => toggleSignUpForm(prevState => !prevState)}>{__('login_form_alternate')}</div>
         </div>
       </Card>
     </>
   );
 };
 
-export default Auth;
+export default Login;

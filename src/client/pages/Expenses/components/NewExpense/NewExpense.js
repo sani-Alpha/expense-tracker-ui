@@ -1,7 +1,8 @@
 import moment from 'moment';
-import {useState, useEffect, useReducer} from 'react';
+import {useState, useEffect, useReducer, useContext} from 'react';
 import {Card, Button, Input} from '../../../../commons/index';
 import styles from './NewExpense.module.scss';
+import AuthContext from '../../../../partials/store/auth.store';
 
 const setNewExpenseData = (prevState, action) => {
   const {type, value, context} = action;
@@ -12,6 +13,7 @@ const setNewExpenseData = (prevState, action) => {
 };
 
 const NewExpense = ({addExpenseToList}) => {
+  const {__} = useContext(AuthContext);
   const minDate = moment().subtract(4, 'years').format('YYYY-MM-DD');
   const maxDate = moment().format('YYYY-MM-DD');
 
@@ -55,13 +57,13 @@ const NewExpense = ({addExpenseToList}) => {
   return (
     <Card className={styles['new-expense-card']}>
       <div className={styles.form}>
-        <label className={styles.heading}>Enter the details of new Expense:</label>
+        <label className={styles.heading}>{__('new_expense_form_title')}</label>
         <div className={styles['form-controllers']}>
           <div className={styles['form-control']}>
             <Input
               id="new-expense-title"
               name="title"
-              label="Title"
+              label={__('new_expense_form_title_label')}
               type="text"
               value={newExpenseData.title}
               className={styles['form-text']}
@@ -73,7 +75,7 @@ const NewExpense = ({addExpenseToList}) => {
               id="new-expense-price"
               name="price"
               value={newExpenseData.price}
-              label="Price"
+              label={__('new_expense_form_price_label')}
               type="number"
               min="0.1"
               step="0.1"
@@ -85,7 +87,7 @@ const NewExpense = ({addExpenseToList}) => {
             <Input
               id="new-expense-date"
               name="date"
-              label="Date"
+              label={__('new_expense_form_date_label')}
               value={moment(newExpenseData.date).format('YYYY-MM-DD')}
               type="date"
               min={minDate}
@@ -97,7 +99,7 @@ const NewExpense = ({addExpenseToList}) => {
         </div>
         <div className={styles['form-action-cta']}>
           <Button disabled={!allowSubmit} clickHandler={submitNewExpenseHandler}>
-            Add Expense
+            {__('new_expense_form_button_label')}
           </Button>
         </div>
       </div>

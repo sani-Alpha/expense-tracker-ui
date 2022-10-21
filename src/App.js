@@ -1,14 +1,14 @@
 import {useContext} from 'react';
 import MainHeader from './client/partials/MainHeader/MainHeader';
-import Auth from './client/pages/Auth/Auth';
+import Login from './client/pages/Auth/Login';
 import Home from './client/pages/Home/Home';
 import Expenses from './client/pages/Expenses/Expenses';
-import Store from './client/partials/store/app.store';
+import AuthContext from './client/partials/store/auth.store';
 
 const App = () => {
-  const {currentScreen, isLoggedIn} = useContext(Store);
+  const {currentScreen, isLoggedIn} = useContext(AuthContext);
 
-  let mainScreen = !isLoggedIn && <Auth />;
+  let mainScreen = !isLoggedIn && <Login />;
   if (isLoggedIn) {
     if (currentScreen === 'home') {
       mainScreen = <Home />;

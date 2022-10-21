@@ -1,0 +1,17 @@
+{
+  "login": "Login",
+  "sign_up": "Sign Up",
+  "logout": "Logout",
+  "login_form_alternate": "Not registered? SignUp Instead!",
+  "email": "E-Mail",
+  "password": "Password",
+  "re_password": "Re-enter Password",
+  "welcome": "Welcome Back!",
+  "expenses": "Expenses",
+  "new_expense_form_title": "Enter the details of new Expense:",
+  "new_expense_form_title_label": "Title",
+  "new_expense_form_price_label": "Price",
+  "new_expense_form_date_label": "Date",
+  "new_expense_form_button_label": "Add Expense",
+  "expense_filter_title": "Filter by year"
+}

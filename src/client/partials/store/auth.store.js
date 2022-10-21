@@ -1,17 +1,24 @@
+import {useTranslation} from 'react-i18next';
 import {createContext, useState, useEffect} from 'react';
+import '../../i18n/i18n';
 
-const AppState = createContext({
+const AuthContext = createContext({
+  lang: '',
   isLoggedIn: false,
-  currentScreen: 'home',
+  currentScreen: '',
+  setSessionLang: () => {},
   login: () => {},
   signUp: () => {},
   logout: () => {},
-  navigationHandler: () => {}
+  navigationHandler: () => {},
+  __: () => {}
 });
 
 export const AuthContextProvider = ({children}) => {
+  const {t} = useTranslation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('home');
+  const [lang, setSessionLang] = useState('en');
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -36,19 +43,22 @@ export const AuthContextProvider = ({children}) => {
   };
 
   return (
-    <AppState.Provider
+    <AuthContext.Provider
       value={{
+        lang,
         isLoggedIn,
         currentScreen,
+        setSessionLang,
         login: loginHandler,
         signUp: signUpHandler,
         logout: logoutHandler,
-        navigationHandler: setCurrentScreen
+        navigationHandler: setCurrentScreen,
+        __: t
       }}
     >
       {children}
-    </AppState.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default AppState;
+export default AuthContext;

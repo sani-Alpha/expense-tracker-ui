@@ -1,6 +1,7 @@
-import {useEffect, useReducer} from 'react';
+import {useContext, useEffect, useReducer} from 'react';
 import {Button, Input, Modal} from '../../commons/index';
-import styles from './Auth.module.scss';
+import styles from './SignUp.module.scss';
+import AuthContext from '../../partials/store/auth.store';
 
 const userDataReducer = (prevState, {action, value, context}) => {
   if (action === 'UPDATE_USER_DATA') {
@@ -18,7 +19,8 @@ const userDataReducer = (prevState, {action, value, context}) => {
   };
 };
 
-const Auth = ({onSignUp, show, close}) => {
+const SignUp = ({onSignUp, show, close}) => {
+  const {__} = useContext(AuthContext);
   const [userData, dispatchUserData] = useReducer(userDataReducer, {
     enteredEmail: '',
     enteredPassword: '',
@@ -35,7 +37,7 @@ const Auth = ({onSignUp, show, close}) => {
         action: 'UPDATE_USER_DATA',
         context: 'formIsValid',
         value:
-          userData.enteredEmail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) &&
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(userData.enteredEmail) &&
           userData.enteredPassword.length > 6 &&
           userData.reEnteredPassword === userData.enteredPassword
       });
@@ -62,7 +64,7 @@ const Auth = ({onSignUp, show, close}) => {
     dispatchUserData({
       action: 'UPDATE_USER_DATA',
       context: 'emailIsValid',
-      value: userData.enteredEmail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+      value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(userData.enteredEmail)
     });
   };
 
@@ -91,8 +93,9 @@ const Auth = ({onSignUp, show, close}) => {
   return (
     <Modal
       show={show}
+      className={styles.signup}
       hideHeader={false}
-      title="Sign Up"
+      title={__('sign_up')}
       isScrollable={false}
       isFullScreen={false}
       onClose={() => close(false)}
@@ -103,7 +106,7 @@ const Auth = ({onSignUp, show, close}) => {
             id="email"
             type="text"
             name="email"
-            label="E-Mail"
+            label={__('email')}
             value={userData.enteredEmail}
             className={styles['form-text']}
             changeHandler={emailChangeHandler}
@@ -115,7 +118,7 @@ const Auth = ({onSignUp, show, close}) => {
             id="password"
             type="password"
             name="password"
-            label="Password"
+            label={__('password')}
             value={userData.enteredPassword}
             className={styles['form-text']}
             changeHandler={passwordChangeHandler}
@@ -127,16 +130,16 @@ const Auth = ({onSignUp, show, close}) => {
             id="re-password"
             type="password"
             name="re-password"
-            label="Re-Enter Password"
+            label={__('re_password')}
             value={userData.reEnteredPassword}
             className={styles['form-text']}
             changeHandler={passwordChangeHandler}
             blurHandler={validatePasswordHandler}
           />
         </div>
-        <div className={styles.actions}>
+        <div className={styles['form-action-cta']}>
           <Button type="submit" className={styles.btn} disabled={!userData.formIsValid}>
-            SignUp
+            {__('sign_up')}
           </Button>
         </div>
       </form>
@@ -144,4 +147,4 @@ const Auth = ({onSignUp, show, close}) => {
   );
 };
 
-export default Auth;
+export default SignUp;

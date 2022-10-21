@@ -28,20 +28,21 @@
     display: flex;
     align-items: center;
     margin: 1rem;
+    margin-bottom: 1.8rem;
 
     .header_title {
       color: black;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: 600;
     }
 
     .close {
+      font-size: 1.3rem;
       margin-left: auto;
       background-size: cover;
       height: 25px;
       width: 25px;
       white-space: nowrap;
-      overflow: auto;
       color: black;
     }
   }

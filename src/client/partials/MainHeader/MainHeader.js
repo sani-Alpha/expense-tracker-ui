@@ -1,12 +1,12 @@
 import {useState, useContext} from 'react';
 import {FaBars, FaTimes} from 'react-icons/fa';
 import NavBar from './NavBar';
-import Store from '../store/app.store';
+import AuthContext from '../store/auth.store';
 import styles from './MainHeader.module.scss';
 
 const MainHeader = () => {
   const [showNavBar, setShowNavBar] = useState(false);
-  const {isLoggedIn, navigationHandler} = useContext(Store);
+  const {isLoggedIn, navigationHandler} = useContext(AuthContext);
 
   return (
     <header className={styles['main-header']}>

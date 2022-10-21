@@ -1,9 +1,9 @@
 import {useContext} from 'react';
-import Store from '../store/app.store';
+import AuthContext from '../store/auth.store';
 import styles from './NavBar.module.scss';
 
 const NavBar = ({style, navBarCloseHandler, showNavBar}) => {
-  const {isLoggedIn, logout, navigationHandler} = useContext(Store);
+  const {isLoggedIn, logout, navigationHandler, __} = useContext(AuthContext);
   return (
     <nav className={showNavBar ? `${styles.nav} ${styles.active}` : styles.nav} style={style}>
       <div className={styles.navTabs}>
@@ -15,18 +15,18 @@ const NavBar = ({style, navBarCloseHandler, showNavBar}) => {
                 navBarCloseHandler(false);
               }}
             >
-              Expenses
+              {__('expenses')}
             </div>
           </div>
         )}
         {isLoggedIn && (
           <div className={styles.navItem + ' ' + styles.btn}>
-            <div onClick={logout}>Logout</div>
+            <div onClick={logout}>{__('logout')}</div>
           </div>
         )}
         {isLoggedIn && (
           <div className={styles.navItem}>
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout}>{__('logout')}</button>
           </div>
         )}
       </div>
