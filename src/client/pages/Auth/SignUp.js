@@ -1,67 +1,93 @@
-import {useState, useEffect, useReducer} from 'react';
+import {useEffect, useReducer} from 'react';
 import {Button, Input, Modal} from '../../commons/index';
 import styles from './Auth.module.scss';
 
-const setValidation = (prevState, {type, value, context}) => {
-  if (type === 'UPDATE_VALIDATION_STATE') {
+const userDataReducer = (prevState, {action, value, context}) => {
+  if (action === 'UPDATE_USER_DATA') {
     return {...prevState, [context]: value};
   }
 
-  return {};
+  return {
+    enteredEmail: '',
+    enteredPassword: '',
+    reEnteredPassword: '',
+    emailIsValid: false,
+    passwordIsValid: false,
+    reEnteredPasswordIsValid: false,
+    formIsValid: false
+  };
 };
 
-const Auth = ({onLogin, show, close}) => {
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredPassword, setEnteredPassword] = useState('');
-  const [reEnteredPassword, setReEnteredPassword] = useState('');
-  const [emailIsValid, setEmailIsValid] = useState();
-
-  const [validation, validationDispatch] = useReducer(setValidation, {});
-  const [passwordIsValid, setPasswordIsValid] = useState();
-  const [formIsValid, setFormIsValid] = useState(false);
+const Auth = ({onSignUp, show, close}) => {
+  const [userData, dispatchUserData] = useReducer(userDataReducer, {
+    enteredEmail: '',
+    enteredPassword: '',
+    reEnteredPassword: '',
+    emailIsValid: false,
+    passwordIsValid: false,
+    reEnteredPasswordIsValid: false,
+    formIsValid: false
+  });
 
   useEffect(() => {
-    const identifier = setTimeout(() => {
-      setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6);
+    const timer = setTimeout(() => {
+      dispatchUserData({
+        action: 'UPDATE_USER_DATA',
+        context: 'formIsValid',
+        value:
+          userData.enteredEmail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) &&
+          userData.enteredPassword.length > 6 &&
+          userData.reEnteredPassword === userData.enteredPassword
+      });
     }, 500);
 
     return () => {
-      clearTimeout(identifier);
+      clearTimeout(timer);
     };
-  }, [enteredEmail, enteredPassword]);
+  }, [userData.enteredEmail, userData.enteredPassword, userData.reEnteredPassword]);
 
   const emailChangeHandler = event => {
-    setEnteredEmail(event.target.value);
-
-    setFormIsValid(event.target.value.includes('@') && enteredPassword.trim().length > 6);
+    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredEmail', value: event.target.value});
   };
 
   const passwordChangeHandler = event => {
     if (event.target.id === 're-password') {
-      setReEnteredPassword(event.target.value);
+      dispatchUserData({action: 'UPDATE_USER_DATA', context: 'reEnteredPassword', value: event.target.value.trim()});
     } else {
-      setEnteredPassword(event.target.value);
+      dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredPassword', value: event.target.value.trim()});
     }
-
-    setFormIsValid(enteredEmail.includes('@') && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes('@'));
+    dispatchUserData({
+      action: 'UPDATE_USER_DATA',
+      context: 'emailIsValid',
+      value: userData.enteredEmail.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+    });
   };
 
-  const validatePasswordHandler = () => {
-    setPasswordIsValid(
-      enteredPassword.trim().length > 6 &&
-        reEnteredPassword.trim().length > 6 &&
-        enteredPassword.trim() === reEnteredPassword.trim()
-    );
+  const validatePasswordHandler = event => {
+    if (event.target.id === 're-password') {
+      dispatchUserData({
+        action: 'UPDATE_USER_DATA',
+        context: 'reEnteredPasswordIsValid',
+        value: userData.reEnteredPassword.length > 6
+      });
+    } else {
+      dispatchUserData({
+        action: 'UPDATE_USER_DATA',
+        context: 'passwordIsValid',
+        value: userData.enteredPassword.length > 6
+      });
+    }
   };
 
   const submitHandler = event => {
     event.preventDefault();
-    onLogin(enteredEmail, enteredPassword);
+    dispatchUserData({});
+    onSignUp(userData.enteredEmail, userData.enteredPassword);
   };
+
   return (
     <Modal
       show={show}
@@ -72,44 +98,44 @@ const Auth = ({onLogin, show, close}) => {
       onClose={() => close(false)}
     >
       <form onSubmit={submitHandler}>
-        <div className={`${styles.control} ${emailIsValid === false ? styles.invalid : ''}`}>
+        <div className={`${styles.control} ${!userData.emailIsValid ? styles.invalid : ''}`}>
           <Input
             id="email"
             type="text"
             name="email"
             label="E-Mail"
-            value={enteredEmail}
+            value={userData.enteredEmail}
             className={styles['form-text']}
             changeHandler={emailChangeHandler}
             blurHandler={validateEmailHandler}
           />
         </div>
-        <div className={`${styles.control} ${passwordIsValid === false ? styles.invalid : ''}`}>
+        <div className={`${styles.control} ${!userData.passwordIsValid ? styles.invalid : ''}`}>
           <Input
             id="password"
             type="password"
             name="password"
             label="Password"
-            value={enteredPassword}
+            value={userData.enteredPassword}
             className={styles['form-text']}
             changeHandler={passwordChangeHandler}
             blurHandler={validatePasswordHandler}
           />
         </div>
-        <div className={`${styles.control} ${passwordIsValid === false ? styles.invalid : ''}`}>
+        <div className={`${styles.control} ${!userData.reEnteredPasswordIsValid === false ? styles.invalid : ''}`}>
           <Input
             id="re-password"
             type="password"
             name="re-password"
-            label="Password"
-            value={reEnteredPassword}
+            label="Re-Enter Password"
+            value={userData.reEnteredPassword}
             className={styles['form-text']}
             changeHandler={passwordChangeHandler}
             blurHandler={validatePasswordHandler}
           />
         </div>
         <div className={styles.actions}>
-          <Button type="submit" className={styles.btn} disabled={!formIsValid}>
+          <Button type="submit" className={styles.btn} disabled={!userData.formIsValid}>
             SignUp
           </Button>
         </div>

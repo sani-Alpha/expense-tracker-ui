@@ -9,6 +9,7 @@ const Input = ({id, name, label, value, type, min, max, step, className, changeH
       value={value}
       className={styles['input-box']}
       onChange={event => changeHandler(event, name)}
+      onBlur={blurHandler}
     />
   );
 
@@ -22,6 +23,7 @@ const Input = ({id, name, label, value, type, min, max, step, className, changeH
         min={min}
         step={step}
         onChange={event => changeHandler(event, name)}
+        onBlur={blurHandler}
       />
     );
   } else if (type === 'date') {
@@ -34,6 +36,7 @@ const Input = ({id, name, label, value, type, min, max, step, className, changeH
         min={min}
         max={max}
         onChange={event => changeHandler(event, name)}
+        onBlur={blurHandler}
       />
     );
   }

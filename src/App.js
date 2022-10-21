@@ -26,12 +26,16 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
+  const signUpHandler = (email, password) => {
+    console.log('Signed Up: ', email, password);
+  };
+
   const logoutHandler = () => {
     localStorage.removeItem('authToken');
     setIsLoggedIn(false);
   };
 
-  let mainScreen = !isLoggedIn && <Auth onLogin={loginHandler} />;
+  let mainScreen = !isLoggedIn && <Auth onLogin={loginHandler} onSignUp={signUpHandler} />;
   if (isLoggedIn) {
     if (currentScreen === 'home') {
       mainScreen = <Home onLogout={logoutHandler} />;
