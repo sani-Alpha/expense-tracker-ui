@@ -6,7 +6,7 @@ const AuthContext = createContext({
   lang: '',
   isLoggedIn: false,
   currentScreen: '',
-  setSessionLang: () => {},
+  changeLang: () => {},
   login: () => {},
   signUp: () => {},
   logout: () => {},
@@ -15,7 +15,10 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = ({children}) => {
-  const {t} = useTranslation();
+  const {
+    t,
+    i18n: {changeLanguage}
+  } = useTranslation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('home');
   const [lang, setSessionLang] = useState('en');
@@ -27,6 +30,11 @@ export const AuthContextProvider = ({children}) => {
       setIsLoggedIn(true);
     }
   }, []);
+
+  const changeLang = lang => {
+    changeLanguage(lang);
+    setSessionLang(lang);
+  };
 
   const loginHandler = (email, password) => {
     localStorage.setItem('authToken', 'dasdk32ok4');
@@ -48,7 +56,7 @@ export const AuthContextProvider = ({children}) => {
         lang,
         isLoggedIn,
         currentScreen,
-        setSessionLang,
+        changeLang,
         login: loginHandler,
         signUp: signUpHandler,
         logout: logoutHandler,
