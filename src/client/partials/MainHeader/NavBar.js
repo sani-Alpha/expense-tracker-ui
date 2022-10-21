@@ -1,6 +1,9 @@
+import {useContext} from 'react';
+import Store from '../store/app.store';
 import styles from './NavBar.module.scss';
 
-const NavBar = ({isLoggedIn, onLogout, navigationHandler, style, navBarCloseHandler, showNavBar}) => {
+const NavBar = ({style, navBarCloseHandler, showNavBar}) => {
+  const {isLoggedIn, logout, navigationHandler} = useContext(Store);
   return (
     <nav className={showNavBar ? `${styles.nav} ${styles.active}` : styles.nav} style={style}>
       <div className={styles.navTabs}>
@@ -18,12 +21,12 @@ const NavBar = ({isLoggedIn, onLogout, navigationHandler, style, navBarCloseHand
         )}
         {isLoggedIn && (
           <div className={styles.navItem + ' ' + styles.btn}>
-            <div onClick={onLogout}>Logout</div>
+            <div onClick={logout}>Logout</div>
           </div>
         )}
         {isLoggedIn && (
           <div className={styles.navItem}>
-            <button onClick={onLogout}>Logout</button>
+            <button onClick={logout}>Logout</button>
           </div>
         )}
       </div>

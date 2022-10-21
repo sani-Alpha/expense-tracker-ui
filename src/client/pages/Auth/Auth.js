@@ -1,7 +1,8 @@
-import {useState, useEffect, useReducer} from 'react';
+import {useState, useEffect, useReducer, useContext} from 'react';
 import {Card, Button, Input} from '../../commons/index';
 import SignUp from './SignUp';
 import styles from './Auth.module.scss';
+import Store from '../../partials/store/app.store';
 
 const userDataReducer = (prevState, {action, value, context}) => {
   if (action === 'UPDATE_USER_DATA') {
@@ -17,7 +18,8 @@ const userDataReducer = (prevState, {action, value, context}) => {
   };
 };
 
-const Auth = ({onLogin, onSignUp}) => {
+const Auth = () => {
+  const {login, signUp} = useContext(Store);
   const [showSignUpForm, toggleSignUpForm] = useState(false);
   const [userData, dispatchUserData] = useReducer(userDataReducer, {
     enteredEmail: '',
@@ -70,15 +72,15 @@ const Auth = ({onLogin, onSignUp}) => {
   const submitHandler = event => {
     event.preventDefault();
     dispatchUserData({});
-    onLogin(userData.enteredEmail, userData.enteredPassword);
+    login(userData.enteredEmail, userData.enteredPassword);
   };
   return (
     <>
       <SignUp
         show={showSignUpForm}
         onSignUp={(email, password) => {
-          toggleSignUpForm(!showSignUpForm);
-          onSignUp(email, password);
+          toggleSignUpForm(prevState => !prevState);
+          signUp(email, password);
         }}
         close={toggleSignUpForm}
       />
@@ -115,7 +117,7 @@ const Auth = ({onLogin, onSignUp}) => {
           </div>
         </form>
         <div className={styles.alternates}>
-          <div onClick={() => toggleSignUpForm(!showSignUpForm)}>Not registered? SignUp Instead!</div>
+          <div onClick={() => toggleSignUpForm(prevState => !prevState)}>Not registered? SignUp Instead!</div>
         </div>
       </Card>
     </>
