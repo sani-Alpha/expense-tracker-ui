@@ -1,7 +1,58 @@
 .backdrop {
+  background: rgba(0, 0, 0, 0.65);
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.modal-container {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #525050;
-  opacity: 100%;
+  top: 50%;
+  left: calc(50% - 1rem);
+  transform: translate(-50%, -50%);
+  background: #fff;
+  margin: 1rem 1rem auto;
+  border-radius: 10px;
+  max-width: 100%;
+  width: 40rem;
+  z-index: 2;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+
+    .header_title {
+      color: black;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .close {
+      margin-left: auto;
+      background-size: cover;
+      height: 25px;
+      width: 25px;
+      white-space: nowrap;
+      overflow: auto;
+      color: black;
+    }
+  }
+
+  .content {
+    margin: 1rem;
+  }
+
+  .modal-body-scrollable {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}
+.full-screen-modal-container {
+  max-width: none;
+  width: 90%;
 }
