@@ -3,6 +3,7 @@ import {Card, Button, Input} from '../../commons/index';
 import SignUp from './SignUp';
 import styles from './Login.module.scss';
 import AuthContext from '../../partials/store/auth.store';
+import AppContext from '../../partials/store/app.store';
 
 const userDataReducer = (prevState, {action, value, context}) => {
   if (action === 'UPDATE_USER_DATA') {
@@ -20,7 +21,8 @@ const userDataReducer = (prevState, {action, value, context}) => {
 
 const Login = () => {
   const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-  const {login, signUp, __} = useContext(AuthContext);
+  const {login, signUp} = useContext(AuthContext);
+  const {__} = useContext(AppContext);
   const [showSignUpForm, toggleSignUpForm] = useState(false);
   const [userData, dispatchUserData] = useReducer(userDataReducer, {
     enteredEmail: '',

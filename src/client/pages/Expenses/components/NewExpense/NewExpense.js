@@ -2,7 +2,7 @@ import moment from 'moment';
 import {useState, useEffect, useReducer, useContext} from 'react';
 import {Card, Button, Input} from '../../../../commons/index';
 import styles from './NewExpense.module.scss';
-import AuthContext from '../../../../partials/store/auth.store';
+import AppContext from '../../../../partials/store/app.store';
 
 const setNewExpenseData = (prevState, action) => {
   const {type, value, context} = action;
@@ -13,7 +13,7 @@ const setNewExpenseData = (prevState, action) => {
 };
 
 const NewExpense = ({addExpenseToList}) => {
-  const {__} = useContext(AuthContext);
+  const {__} = useContext(AppContext);
   const minDate = moment().subtract(4, 'years').format('YYYY-MM-DD');
   const maxDate = moment().format('YYYY-MM-DD');
 

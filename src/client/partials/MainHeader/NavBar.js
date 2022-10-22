@@ -1,9 +1,11 @@
 import {useContext} from 'react';
 import AuthContext from '../store/auth.store';
+import AppContext from '../store/app.store';
 import styles from './NavBar.module.scss';
 
 const NavBar = ({style, navBarCloseHandler, showNavBar}) => {
-  const {isLoggedIn, logout, navigationHandler, __} = useContext(AuthContext);
+  const {isLoggedIn, logout} = useContext(AuthContext);
+  const {navigationHandler, __} = useContext(AppContext);
   return (
     <nav className={showNavBar ? `${styles.nav} ${styles.active}` : styles.nav} style={style}>
       <div className={styles.navTabs}>

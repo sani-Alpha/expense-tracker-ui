@@ -1,7 +1,7 @@
 import {useContext, useEffect, useReducer} from 'react';
 import {Button, Input, Modal} from '../../commons/index';
 import styles from './SignUp.module.scss';
-import AuthContext from '../../partials/store/auth.store';
+import AppContext from '../../partials/store/app.store';
 
 const userDataReducer = (prevState, {action, value, context}) => {
   if (action === 'UPDATE_USER_DATA') {
@@ -20,7 +20,7 @@ const userDataReducer = (prevState, {action, value, context}) => {
 };
 
 const SignUp = ({onSignUp, show, close}) => {
-  const {__} = useContext(AuthContext);
+  const {__} = useContext(AppContext);
   const [userData, dispatchUserData] = useReducer(userDataReducer, {
     enteredEmail: '',
     enteredPassword: '',

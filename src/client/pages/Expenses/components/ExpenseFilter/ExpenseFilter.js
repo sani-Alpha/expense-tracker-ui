@@ -1,10 +1,10 @@
 import {useContext} from 'react';
-import AuthContext from '../../../../partials/store/auth.store';
+import AppContext from '../../../../partials/store/app.store';
 import DropDown from '../../../../commons/DropDown/DropDown';
 import './ExpenseFilter.scss';
 
 const ExpenseFilter = ({changeHandler, selected}) => {
-  const {__} = useContext(AuthContext);
+  const {__} = useContext(AppContext);
   const options = [
     {label: 'All', value: -1, _id: 0},
     {label: '2022', value: 2022, _id: 1},
