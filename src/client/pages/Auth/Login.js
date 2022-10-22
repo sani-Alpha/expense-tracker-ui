@@ -1,4 +1,4 @@
-import {useState, useEffect, useReducer, useContext} from 'react';
+import {useState, useEffect, useReducer, useContext, useRef} from 'react';
 import {Card, Button, Input} from '../../commons/index';
 import SignUp from './SignUp';
 import styles from './Login.module.scss';
@@ -48,34 +48,39 @@ const Login = () => {
     };
   }, [userData.enteredEmail, userData.enteredPassword]);
 
-  const emailChangeHandler = event => {
-    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredEmail', value: event.target.value.trim()});
+  const inputChangeHandler = event => {
+    dispatchUserData({action: 'UPDATE_USER_DATA', context: event.target.name, value: event.target.value.trim()});
   };
 
-  const passwordChangeHandler = event => {
-    dispatchUserData({action: 'UPDATE_USER_DATA', context: 'enteredPassword', value: event.target.value.trim()});
+  const validateInputHandler = event => {
+    const context = event.target.name;
+
+    if (context === 'enteredPassword') {
+      dispatchUserData({
+        action: 'UPDATE_USER_DATA',
+        context: 'passwordIsValid',
+        value: userData.enteredPassword.length > 6
+      });
+    } else if (context === 'enteredEmail') {
+      dispatchUserData({
+        action: 'UPDATE_USER_DATA',
+        context: 'emailIsValid',
+        value: emailRegex.test(userData.enteredEmail)
+      });
+    }
   };
 
-  const validateEmailHandler = () => {
-    dispatchUserData({
-      action: 'UPDATE_USER_DATA',
-      context: 'emailIsValid',
-      value: emailRegex.test(userData.enteredEmail)
-    });
-  };
-
-  const validatePasswordHandler = () => {
-    dispatchUserData({
-      action: 'UPDATE_USER_DATA',
-      context: 'passwordIsValid',
-      value: userData.enteredPassword.length > 6
-    });
-  };
-
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
   const submitHandler = event => {
     event.preventDefault();
-    dispatchUserData({});
-    login(userData.enteredEmail, userData.enteredPassword);
+    if (userData.formIsValid) {
+      login(userData.enteredEmail, userData.enteredPassword);
+    } else if (!userData.emailIsValid) {
+      emailInputRef.current.focus();
+    } else if (!userData.passwordIsValid) {
+      passwordInputRef.current.focus();
+    }
   };
   return (
     <>
@@ -90,32 +95,30 @@ const Login = () => {
       <Card className={styles.login}>
         <div className={styles['header_title']}>{__('login')}</div>
         <form onSubmit={submitHandler}>
-          <div className={`${styles.control} ${!userData.emailIsValid ? styles.invalid : ''}`}>
-            <Input
-              id="email"
-              type="text"
-              name="email"
-              label={__('email')}
-              value={userData.enteredEmail}
-              className={styles['form-text']}
-              changeHandler={emailChangeHandler}
-              blurHandler={validateEmailHandler}
-            />
-          </div>
-          <div className={`${styles.control} ${userData.passwordIsValid === false ? styles.invalid : ''}`}>
-            <Input
-              id="password"
-              type="password"
-              name="password"
-              label={__('password')}
-              value={userData.enteredPassword}
-              className={styles['form-text']}
-              changeHandler={passwordChangeHandler}
-              blurHandler={validatePasswordHandler}
-            />
-          </div>
+          <Input
+            id="email"
+            ref={emailInputRef}
+            type="text"
+            name="enteredEmail"
+            label={__('email')}
+            isValid={userData.emailIsValid}
+            value={userData.enteredEmail}
+            changeHandler={inputChangeHandler}
+            blurHandler={validateInputHandler}
+          />
+          <Input
+            ref={passwordInputRef}
+            id="password"
+            type="password"
+            name="enteredPassword"
+            label={__('password')}
+            isValid={userData.passwordIsValid}
+            value={userData.enteredPassword}
+            changeHandler={inputChangeHandler}
+            blurHandler={validateInputHandler}
+          />
           <div className={styles['form-action-cta']}>
-            <Button type="submit" className={styles.btn} disabled={!userData.formIsValid}>
+            <Button type="submit" className={styles.btn}>
               {__('login')}
             </Button>
           </div>

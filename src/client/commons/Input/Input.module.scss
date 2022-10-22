@@ -1,15 +1,30 @@
-.form-control-input {
-  display: flex;
-  flex-flow: column wrap;
-  margin: 20px;
+.control {
+  .form-control-input {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 20px;
 
-  .input-label {
-    font-size: 16px;
-    font-weight: 600;
-  }
+    label {
+      font-size: 18px;
+      font-weight: 500;
+    }
 
-  .input-box {
-    border-radius: 5px;
-    border: 1px solid black;
+    input {
+      border-radius: 5px;
+      border: 1px solid black;
+      min-height: 2rem;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+        border-color: #4f005f;
+        background: #f6dbfc;
+      }
+    }
   }
+}
+
+.control.invalid input {
+  border-color: red;
+  background: #fbdada;
 }

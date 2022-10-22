@@ -101,42 +101,36 @@ const SignUp = ({onSignUp, show, close}) => {
       onClose={() => close(false)}
     >
       <form onSubmit={submitHandler}>
-        <div className={`${styles.control} ${!userData.emailIsValid ? styles.invalid : ''}`}>
-          <Input
-            id="email"
-            type="text"
-            name="email"
-            label={__('email')}
-            value={userData.enteredEmail}
-            className={styles['form-text']}
-            changeHandler={emailChangeHandler}
-            blurHandler={validateEmailHandler}
-          />
-        </div>
-        <div className={`${styles.control} ${!userData.passwordIsValid ? styles.invalid : ''}`}>
-          <Input
-            id="password"
-            type="password"
-            name="password"
-            label={__('password')}
-            value={userData.enteredPassword}
-            className={styles['form-text']}
-            changeHandler={passwordChangeHandler}
-            blurHandler={validatePasswordHandler}
-          />
-        </div>
-        <div className={`${styles.control} ${!userData.reEnteredPasswordIsValid === false ? styles.invalid : ''}`}>
-          <Input
-            id="re-password"
-            type="password"
-            name="re-password"
-            label={__('re_password')}
-            value={userData.reEnteredPassword}
-            className={styles['form-text']}
-            changeHandler={passwordChangeHandler}
-            blurHandler={validatePasswordHandler}
-          />
-        </div>
+        <Input
+          id="email"
+          type="text"
+          name="email"
+          label={__('email')}
+          value={userData.enteredEmail}
+          className={styles['form-text']}
+          changeHandler={emailChangeHandler}
+          blurHandler={validateEmailHandler}
+        />
+        <Input
+          id="password"
+          type="password"
+          name="password"
+          label={__('password')}
+          value={userData.enteredPassword}
+          className={styles['form-text']}
+          changeHandler={passwordChangeHandler}
+          blurHandler={validatePasswordHandler}
+        />
+        <Input
+          id="re-password"
+          type="password"
+          name="re-password"
+          label={__('re_password')}
+          value={userData.reEnteredPassword}
+          className={styles['form-text']}
+          changeHandler={passwordChangeHandler}
+          blurHandler={validatePasswordHandler}
+        />
         <div className={styles['form-action-cta']}>
           <Button type="submit" className={styles.btn} disabled={!userData.formIsValid}>
             {__('sign_up')}
