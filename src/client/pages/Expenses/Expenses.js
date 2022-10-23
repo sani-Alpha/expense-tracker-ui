@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, memo} from 'react';
 import ExpenseList from './components/ExpenseList/ExpenseList';
 import ExpenseFilter from './components/ExpenseFilter/ExpenseFilter';
 import NewExpense from './components/NewExpense/NewExpense';
@@ -27,4 +27,4 @@ const Expenses = () => {
   );
 };
 
-export default Expenses;
+export default memo(Expenses);

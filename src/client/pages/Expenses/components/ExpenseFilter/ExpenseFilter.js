@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, memo} from 'react';
 import AppContext from '../../../../partials/store/app.store';
 import DropDown from '../../../../commons/DropDown/DropDown';
 import './ExpenseFilter.scss';
@@ -22,4 +22,4 @@ const ExpenseFilter = ({changeHandler, selected}) => {
   );
 };
 
-export default ExpenseFilter;
+export default memo(ExpenseFilter);

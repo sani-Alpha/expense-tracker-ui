@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, memo} from 'react';
 import {Card} from '../../commons/index';
 import styles from './Home.module.scss';
 import AppContext from '../../partials/store/app.store';
@@ -12,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

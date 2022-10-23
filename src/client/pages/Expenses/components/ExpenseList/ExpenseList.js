@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
 import Graph from '../../../../commons/Graph/Graph';
@@ -38,4 +39,4 @@ const ExpenseList = ({data, filter}) => {
   return <h2 style={{textAlign: 'center'}}>No expenses found!</h2>;
 };
 
-export default ExpenseList;
+export default memo(ExpenseList);
