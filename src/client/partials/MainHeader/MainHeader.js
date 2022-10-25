@@ -1,4 +1,4 @@
-import {useState, useContext, memo} from 'react';
+import {useState, useContext} from 'react';
 import {FaBars, FaTimes} from 'react-icons/fa';
 import NavBar from './NavBar';
 import AuthContext from '../store/auth.store';
@@ -25,4 +25,4 @@ const MainHeader = () => {
   );
 };
 
-export default memo(MainHeader);
+export default MainHeader;

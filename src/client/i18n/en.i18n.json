@@ -8,6 +8,7 @@
   "re_password": "Re-enter Password",
   "welcome": "Welcome Back!",
   "expenses": "Expenses",
+  "no_expenses": "No expense found!",
   "new_expense_form_title": "Enter the details of new Expense:",
   "new_expense_form_title_label": "Title",
   "new_expense_form_price_label": "Price",

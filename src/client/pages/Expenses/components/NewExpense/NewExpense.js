@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {useState, useEffect, useReducer, useContext, useRef, memo} from 'react';
+import {useState, useEffect, useReducer, useContext, useRef} from 'react';
 import {Card, Button, Input} from '../../../../commons/index';
 import styles from './NewExpense.module.scss';
 import AppContext from '../../../../partials/store/app.store';
@@ -127,4 +127,4 @@ const NewExpense = ({addExpenseToList}) => {
   );
 };
 
-export default memo(NewExpense);
+export default NewExpense;

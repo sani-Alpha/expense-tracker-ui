@@ -1,4 +1,4 @@
-import {useContext, useEffect, useReducer, memo} from 'react';
+import {useContext, useEffect, useReducer} from 'react';
 import {Button, Input, Modal} from '../../commons/index';
 import styles from './SignUp.module.scss';
 import AppContext from '../../partials/store/app.store';
@@ -141,4 +141,4 @@ const SignUp = ({onSignUp, show, close}) => {
   );
 };
 
-export default memo(SignUp);
+export default SignUp;

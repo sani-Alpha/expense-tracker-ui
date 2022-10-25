@@ -1,8 +1,7 @@
+import {memo} from 'react';
 import './ExpenseItem.scss';
 
 const ExpenseItem = ({item, price, date}) => {
-  // const [title, setTitle] = useState(item);
-
   const month = date.toLocaleString('en-IN', {month: 'long'});
   const day = date.toLocaleString('en-IN', {day: '2-digit'});
   const year = date.getFullYear();
@@ -21,4 +20,4 @@ const ExpenseItem = ({item, price, date}) => {
   );
 };
 
-export default ExpenseItem;
+export default memo(ExpenseItem);

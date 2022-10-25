@@ -1,4 +1,4 @@
-import {useContext, memo} from 'react';
+import {useContext} from 'react';
 import AuthContext from '../store/auth.store';
 import AppContext from '../store/app.store';
 import styles from './NavBar.module.scss';
@@ -36,4 +36,4 @@ const NavBar = ({style, navBarCloseHandler, showNavBar}) => {
   );
 };
 
-export default memo(NavBar);
+export default NavBar;

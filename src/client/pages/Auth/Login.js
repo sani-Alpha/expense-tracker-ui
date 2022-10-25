@@ -1,4 +1,4 @@
-import {useState, useEffect, useReducer, useContext, useRef, memo} from 'react';
+import {useState, useEffect, useReducer, useContext, useRef} from 'react';
 import {Card, Button, Input} from '../../commons/index';
 import SignUp from './SignUp';
 import styles from './Login.module.scss';
@@ -131,4 +131,4 @@ const Login = () => {
   );
 };
 
-export default memo(Login);
+export default Login;

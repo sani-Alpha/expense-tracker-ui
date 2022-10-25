@@ -1,9 +1,12 @@
-import {memo} from 'react';
+import {useContext} from 'react';
 import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
 import Graph from '../../../../commons/Graph/Graph';
+import AppContext from '../../../../partials/store/app.store';
 
 const ExpenseList = ({data, filter}) => {
+  const {__} = useContext(AppContext);
+
   const qualifiyingData = filter === '-1' ? data : data.filter(item => item.date.getFullYear() === Number(filter));
   const months = moment.monthsShort();
   const labels = months.map(month => {
@@ -36,7 +39,7 @@ const ExpenseList = ({data, filter}) => {
       </>
     );
   }
-  return <h2 style={{textAlign: 'center'}}>No expenses found!</h2>;
+  return <h2 style={{textAlign: 'center'}}>{__('no_expenses')}</h2>;
 };
 
-export default memo(ExpenseList);
+export default ExpenseList;
