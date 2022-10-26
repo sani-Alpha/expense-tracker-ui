@@ -2,7 +2,7 @@ import {useContext, memo, useMemo} from 'react';
 import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
 import {Graph} from '../../../../common/index';
-import AppContext from '../../../../partials/store/app.store';
+import AppContext from '../../../../partials/context/app.context';
 
 const ExpenseList = ({data, filter}) => {
   const {__} = useContext(AppContext);

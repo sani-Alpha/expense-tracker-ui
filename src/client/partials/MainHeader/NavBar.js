@@ -1,6 +1,6 @@
 import {useContext} from 'react';
-import AuthContext from '../store/auth.store';
-import AppContext from '../store/app.store';
+import AuthContext from '../context/auth.context';
+import AppContext from '../context/app.context';
 import styles from './NavBar.module.scss';
 
 const NavBar = ({style, navBarCloseHandler, showNavBar}) => {

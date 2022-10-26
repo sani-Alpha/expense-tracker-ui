@@ -2,8 +2,8 @@ import {useState, useEffect, useReducer, useContext, useRef} from 'react';
 import {Card, Button, Input} from '../../common/index';
 import SignUp from './SignUp';
 import styles from './Login.module.scss';
-import AuthContext from '../../partials/store/auth.store';
-import AppContext from '../../partials/store/app.store';
+import AuthContext from '../../partials/context/auth.context';
+import AppContext from '../../partials/context/app.context';
 
 const userDataReducer = (prevState, {action, value, context}) => {
   if (action === 'UPDATE_USER_DATA') {

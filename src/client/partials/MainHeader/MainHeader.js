@@ -1,8 +1,8 @@
 import {useState, useContext} from 'react';
 import {FaBars, FaTimes} from 'react-icons/fa';
 import NavBar from './NavBar';
-import AuthContext from '../store/auth.store';
-import AppContext from '../store/app.store';
+import AuthContext from '../context/auth.context';
+import AppContext from '../context/app.context';
 import styles from './MainHeader.module.scss';
 
 const MainHeader = () => {

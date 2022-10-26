@@ -2,7 +2,7 @@ import moment from 'moment';
 import {useState, useEffect, useReducer, useContext, useRef} from 'react';
 import {Card, Button, Input} from '../../../../common/index';
 import styles from './NewExpense.module.scss';
-import AppContext from '../../../../partials/store/app.store';
+import AppContext from '../../../../partials/context/app.context';
 
 const setNewExpenseData = (prevState, action) => {
   const {type, value, context} = action;

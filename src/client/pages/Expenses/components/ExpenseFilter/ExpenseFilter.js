@@ -1,5 +1,5 @@
 import {useContext, memo} from 'react';
-import AppContext from '../../../../partials/store/app.store';
+import AppContext from '../../../../partials/context/app.context';
 import {DropDown} from '../../../../common/index';
 import './ExpenseFilter.scss';
 
