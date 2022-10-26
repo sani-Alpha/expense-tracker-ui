@@ -1,5 +1,5 @@
 import {useContext, useEffect, useReducer} from 'react';
-import {Button, Input, Modal} from '../../commons/index';
+import {Button, Input, Modal} from '../../common/index';
 import styles from './SignUp.module.scss';
 import AppContext from '../../partials/store/app.store';
 

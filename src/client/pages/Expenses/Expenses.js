@@ -2,7 +2,7 @@ import {useState, memo} from 'react';
 import ExpenseList from './components/ExpenseList/ExpenseList';
 import ExpenseFilter from './components/ExpenseFilter/ExpenseFilter';
 import NewExpense from './components/NewExpense/NewExpense';
-import Card from '../../commons/Card/Card';
+import {Card} from '../../common/index';
 import './Expenses.scss';
 
 const Expenses = () => {

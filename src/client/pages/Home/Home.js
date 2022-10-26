@@ -1,5 +1,5 @@
 import {useContext, memo} from 'react';
-import {Card} from '../../commons/index';
+import {Card} from '../../common/index';
 import styles from './Home.module.scss';
 import AppContext from '../../partials/store/app.store';
 

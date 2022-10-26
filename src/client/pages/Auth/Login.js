@@ -1,5 +1,5 @@
 import {useState, useEffect, useReducer, useContext, useRef} from 'react';
-import {Card, Button, Input} from '../../commons/index';
+import {Card, Button, Input} from '../../common/index';
 import SignUp from './SignUp';
 import styles from './Login.module.scss';
 import AuthContext from '../../partials/store/auth.store';

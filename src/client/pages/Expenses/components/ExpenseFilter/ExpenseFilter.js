@@ -1,6 +1,6 @@
 import {useContext, memo} from 'react';
 import AppContext from '../../../../partials/store/app.store';
-import DropDown from '../../../../commons/DropDown/DropDown';
+import {DropDown} from '../../../../common/index';
 import './ExpenseFilter.scss';
 
 const ExpenseFilter = ({changeHandler, selected}) => {

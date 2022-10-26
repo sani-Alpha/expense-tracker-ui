@@ -1,13 +1,15 @@
-import {useContext} from 'react';
+import {useContext, memo, useMemo} from 'react';
 import moment from 'moment';
 import ExpenseItem from './ExpenseItem';
-import Graph from '../../../../commons/Graph/Graph';
+import {Graph} from '../../../../common/index';
 import AppContext from '../../../../partials/store/app.store';
 
 const ExpenseList = ({data, filter}) => {
   const {__} = useContext(AppContext);
 
-  const qualifiyingData = filter === '-1' ? data : data.filter(item => item.date.getFullYear() === Number(filter));
+  const qualifiyingData = useMemo(() => {
+    return filter === '-1' ? data : data.filter(item => item.date.getFullYear() === Number(filter));
+  }, [data, filter]);
   const months = moment.monthsShort();
   const labels = months.map(month => {
     return {label: month, value: 0};
@@ -42,4 +44,4 @@ const ExpenseList = ({data, filter}) => {
   return <h2 style={{textAlign: 'center'}}>{__('no_expenses')}</h2>;
 };
 
-export default ExpenseList;
+export default memo(ExpenseList);
